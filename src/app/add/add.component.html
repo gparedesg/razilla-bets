@@ -1,1 +1,26 @@
-<p>add works!</p>
+<div class="main-wrapper login-body">
+    <div class="login-wrapper">
+        <div class="container">
+          <div class="card">
+           <div class="card-header">
+           	  <h3 class="float-left">Llenar Apuesta</h3>
+              <button [routerLink]="'/main'" class="float-right btn btn-primary">
+            	<i class="fa fa-caret-left"></i> Regresar
+              </button>
+           </div>
+           <div class="card-body">
+			<form>
+			  <div *ngFor="let question of questions; index as i; first as isFirst" class="form-group row">
+			    <label *ngIf="!isFirst" class="col-sm-6 col-form-label">{{ question.question }}</label>
+			    <div class="col-sm-6">
+			      <select class="form-control" *ngIf="question.options">
+			        <option *ngFor="let option of question.options">{{ option }}</option>
+			      </select>
+			      <input *ngIf="!question.options && !isFirst" type="text" class="form-control">
+			    </div>
+			  </div>
+			</form>
+          </div>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+
+export interface Question { question: string; options: string[]; }
 
 @Component({
   selector: 'app-add',
@@ -7,9 +11,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddComponent implements OnInit {
 
-  constructor() { }
+  server: Observable<any>;
+  questions: Question[] = [];
+
+  constructor(private afs: AngularFirestore) {
+    this.server = afs.collection('bets').doc('69A3UONyvVS03vbsxVSE').valueChanges();
+  }
 
   ngOnInit(): void {
+  	this.server.forEach((server) =>
+      this.questions = server.questions
+	)
   }
 
 }
