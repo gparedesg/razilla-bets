@@ -13,6 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "baseHref": "/razilla-bets/",
             "outputPath": "dist/superbowl",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -26,7 +27,7 @@
             "styles": [
               "src/styles.css",
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": []
           },
@@ -118,6 +119,10 @@
               "devServerTarget": "superbowl:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {}
         }
       }
     }
