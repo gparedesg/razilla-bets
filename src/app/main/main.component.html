@@ -17,14 +17,14 @@
 			    <tr>
 			      <th></th>
 			      <th>Question</th>
-			      <td *ngFor="let user of users" scope="col">{{ user.username }}</td>
+			      <th *ngFor="let user of users" scope="col">{{ user.username }}</th>
 			    </tr>
 			  </thead>
-			  <tbody *ngFor="let user of users">
-			    <tr *ngFor="let answer of user.bets; index as i">
-			      <th *ngIf="i!=0" scope="row">{{i}}</th>
-			      <th *ngIf="i!=0" scope="row">{{ answer.question }}</th>
-			      <td *ngIf="i!=0" scope="row">{{ answer.answer }}</td>
+			  <tbody>
+			    <tr *ngFor="let question of questions | slice: 1; index as i">
+			      <th scope="row">{{ i+1 }}</th>
+			      <td scope="row">{{ question?.question }}</td>
+			      <td *ngFor="let user of users" scope="row">{{ user.bets[i+1]?.answer }}</td>
 			    </tr>
 			  </tbody>
 			</table>
