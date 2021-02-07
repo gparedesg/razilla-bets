@@ -42,6 +42,7 @@ export class AddComponent implements OnInit {
     this.auth.currentUser.then((user) => {
       this.afs.collection('bets').doc(user.uid).set({
         'author_uid': user.uid,
+        'username': user.displayName,
         'bets': this.questions
       }).then((result) => this.router.navigate(['main']))
     })
