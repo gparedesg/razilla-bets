@@ -9,17 +9,17 @@
               </button>
            </div>
            <div class="card-body">
-			<form>
 			  <div *ngFor="let question of questions; index as i; first as isFirst" class="form-group row">
 			    <label *ngIf="!isFirst" class="col-sm-6 col-form-label">{{ question.question }}</label>
 			    <div class="col-sm-6">
-			      <select class="form-control" *ngIf="question.options">
-			        <option *ngFor="let option of question.options">{{ option }}</option>
+			      <select name="answer" [(ngModel)]="question.answer" class="form-control" *ngIf="question.options">
+			      	<option value="" disabled selected>Pick one</option>
+			        <option [value]="option" *ngFor="let option of question.options">{{ option }}</option>
 			      </select>
-			      <input *ngIf="!question.options && !isFirst" type="text" class="form-control">
+			      <input name="answer" [(ngModel)]="question.answer" *ngIf="!question.options && !isFirst" type="text" class="form-control">
 			    </div>
 			  </div>
-			</form>
+			  <button (click)="update()" class="btn btn-primary btn-block">Actualizar</button>
           </div>
         </div>
     </div>
