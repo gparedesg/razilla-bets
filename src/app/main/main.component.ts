@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 export interface Question { question: string; options: string[]; answer: string }
@@ -16,7 +18,11 @@ export class MainComponent implements OnInit {
   users: any[] = [];
   userName: string;
 
-  constructor(private afs: AngularFirestore) { }
+  constructor(
+  	private afs: AngularFirestore,
+  	private auth: AngularFireAuth,
+  	private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.server = this.afs.collection('bets').valueChanges()
@@ -30,6 +36,15 @@ export class MainComponent implements OnInit {
         }
       })
     })
+  }
+
+  logout() {
+    this.auth.signOut()
+      .then((result) => {
+        this.router.navigate(['/'])
+      }).catch((error) => {
+        console.error(error)
+      })
   }
 
 }
